@@ -5,7 +5,7 @@ export const listaProductos = async(req, res) => {
     //pedir a la BD la lista de la collections de productos
     const productos = await Producto.find();
     res.status(200).json(productos);
-    
+
   } catch (error) {
     console.log(error);
     res.status(404).json({
@@ -14,6 +14,20 @@ export const listaProductos = async(req, res) => {
   }
 
 };
+
+export const obtenerProducto = async(req, res) => {
+    try {
+        console.log(req.params.id)
+        //si encontre el producto
+        const productoBuscado = await Producto.findById(req.params.id);
+        res.status(200).json(productoBuscado);
+    } catch (error) {
+        console.log(error);
+        res.status(404).json({
+            mensaje: "No se encontro el producto solicitado"
+        })
+    }
+}
 
 export const crearProducto = async (req, res)=>{
  try {
